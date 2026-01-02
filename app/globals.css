@@ -3,6 +3,7 @@
 :root {
   --background: var(--color-zinc-200);
   --foreground: var(--color-neutral-900);
+  --accent-color: var(--color-sky-400);
 }
 
 @theme inline {
@@ -15,6 +16,7 @@
   :root {
     --background: var(--color-zinc-950);
     --foreground: var(--color-neutral-200);
+    --accent-color: var(--color-sky-400);
   }
 }
 

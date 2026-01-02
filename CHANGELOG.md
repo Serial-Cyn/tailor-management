@@ -1,3 +1,10 @@
+## **0.0.3 - NAVBAR UI ENHANCEMENT 0**
+
+Updated `navbar` UI
+- Added accent colors
+- Changed spacing of navbar tabs to `space-x-8`, probably `32px` according to Tailwind CSS
+
+
 ## **0.0.2 - STYLE AND NAVBAR UPDATE**
 
 Updated `Alan Sans`. I don't know why, but Next.js couldn't find `Alan Sans`. For now, we'll stick with `Poppins`.
