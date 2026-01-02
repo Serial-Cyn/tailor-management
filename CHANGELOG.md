@@ -1,11 +1,11 @@
-## **0.0.3 - NAVBAR UI ENHANCEMENT 0**
+## **0.0.3 - NAVBAR UI ENHANCEMENT 0** --- 02/01/2026
 
 Updated `navbar` UI
 - Added accent colors
 - Changed spacing of navbar tabs to `space-x-8`, probably `32px` according to Tailwind CSS
 
 
-## **0.0.2 - STYLE AND NAVBAR UPDATE**
+## **0.0.2 - STYLE AND NAVBAR UPDATE** --- 02/01/2026
 
 Updated `Alan Sans`. I don't know why, but Next.js couldn't find `Alan Sans`. For now, we'll stick with `Poppins`.
 - Added Navigation Bar as components
@@ -22,13 +22,13 @@ Updated `Alan Sans`. I don't know why, but Next.js couldn't find `Alan Sans`. Fo
 - Changed font family `Poppins, sans-serif`
 
 
-## **0.0.1 - FONT UPDATE**
+## **0.0.1 - FONT UPDATE** --- 02/01/2026
 
 Updated the default font used by `Next.js`.
 - Changed `Geist` to `Alan Sans` Font
 
 
-## **0.0.0 - INITIALIZATION**
+## **0.0.0 - INITIALIZATION** --- 02/01/2026
 
 Initial update for the system.
 - Cleaned `app/page.tsx`
