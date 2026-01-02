@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import Navbar from "@/components/navbar";
 
 export default function Home() {
@@ -15,9 +16,7 @@ export default function Home() {
           </p>
         </div>
         <div id="cta">
-          <button className="bg-(--accent-color) hover:bg-sky-600 px-4 py-2 text-zinc-950 rounded-full cursor-pointer hover:scale-105 transition-transform duration-200">
-            Get Started!
-          </button>
+          <Button label="Get Started" variant="primary" />
         </div>
       </div>
     </main>
