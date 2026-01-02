@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Alan_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const alanSans = Alan_Sans({
-  variable: "--font-alan-sans",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "700"],
 });
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${alanSans.variable} antialiased`}
+        className={`${poppins.variable} antialiased`}
       >
         {children}
       </body>
