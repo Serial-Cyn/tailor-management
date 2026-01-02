@@ -1,6 +1,7 @@
+
 export default function Navbar() {
     return (
-        <nav className="flex px-6 py-4 min-w-screen justify-between items-center">
+        <nav className="sticky flex px-6 py-4 min-w-full bg-zinc-900 rounded-b-md justify-between items-center">
             {/* COMPANY LOGO OR BRANDING */}
             <div id="logo">
                 TailOps
@@ -13,8 +14,8 @@ export default function Navbar() {
                     <li className="hover:text-neutral-400 cursor-pointer">Contact</li>
                     {/* CTA */}
                     <li>
-                        <button className="bg-(--accent-color) dark:hover:bg-sky-600 px-4 py-2 text-zinc-950 rounded-full cursor-pointer hover:scale-105 transition-transform duration-200">
-                            Get Started!
+                        <button className="bg-foreground hover:bg-neutral-400 px-6 py-2 text-zinc-950 rounded-full cursor-pointer hover:scale-105 transition-transform duration-200">
+                            Log in
                         </button>
                     </li>
                 </ul>

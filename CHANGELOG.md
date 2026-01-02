@@ -1,3 +1,8 @@
+## **0.1.0 - LANDING PAGE** --- 02/01/2026
+
+Added Landing page for users to see.
+- Wrapped up the first version of the landing page `app/page.tsx`
+
 ## **0.0.3 - NAVBAR UI ENHANCEMENT 0** --- 02/01/2026
 
 Updated `navbar` UI
