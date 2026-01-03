@@ -1,6 +1,6 @@
 export default function Navbar() {
     return (
-        <nav className="sticky flex p-6 min-w-full bg-zinc-900 rounded-b-md justify-between items-center">
+        <nav className="absolute top-0 flex p-6 min-w-full bg-zinc-900 rounded-b-md justify-between items-center">
             {/* COMPANY LOGO OR BRANDING */}
             <div id="logo">
                 TailOps
