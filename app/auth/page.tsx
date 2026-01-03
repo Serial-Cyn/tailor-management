@@ -13,6 +13,7 @@ import EntryField from "@/components/form-control/entryField";
 import Navbar from "@/components/navbar";
 
 export default function AuthPage() {
+    // States that toggle between login and registration forms
     const [isLogin, setIsLogin] = useState(true);
     const [formTitle, setFormTitle] = useState("Login");
     const [formImage, setFormImage] = useState(LogInArt);
@@ -20,7 +21,7 @@ export default function AuthPage() {
     // Reuses the same form for login and registration by toggling the state
     function changeForm() {
         setIsLogin(!isLogin);
-        setFormTitle(isLogin ? "Register" : "Login");
+        setFormTitle(isLogin ? "Sign Up" : "Log In");
         setFormImage(isLogin ? SignUpArt : LogInArt);
     }
 
@@ -70,8 +71,9 @@ export default function AuthPage() {
                                     required
                                 />
                             )}
+                            {/* BUTTONS */}
                             <div className="mt-6 flex flex-col justify-center items-center space-y-2">
-                                <Button label="Login" variant="primary" type="submit" full />
+                                <Button label={isLogin ? "Let's go!" : "Sign up!"} variant="primary" type="submit" full />
                                 <button
                                     type="button" 
                                     className="text-sm text-neutral-400 cursor-pointer"
@@ -84,7 +86,7 @@ export default function AuthPage() {
                     </div>
                 </div>
 
-                {/* Image that promotes webapp */}
+                {/* Image that promotes webapp, adds a little UX to make it welcoming */}
                 <div id="promo-image" className="w-1/2 p-8 hidden md:flex flex-col bg-zinc-900 justify-center items-center border-l border-neutral-800 space-y-8">
                     <img
                         src={formImage.src}
