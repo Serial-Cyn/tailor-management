@@ -1,6 +1,7 @@
 "use client"
 
 // LIBRARIES
+import Image from "next/image";
 import { useState } from "react";
 
 // ILLUSTRATIONS
@@ -79,7 +80,7 @@ export default function AuthPage() {
                                     className="text-sm text-neutral-400 cursor-pointer"
                                     onClick={changeForm}
                                 >
-                                    Don't have an account? Click me!
+                                    Don&apos;t have an account? Click me!
                                 </button>
                             </div>
                         </form>
@@ -88,9 +89,11 @@ export default function AuthPage() {
 
                 {/* Image that promotes webapp, adds a little UX to make it welcoming */}
                 <div id="promo-image" className="w-1/2 p-8 hidden md:flex flex-col bg-zinc-900 justify-center items-center border-l border-neutral-800 space-y-8">
-                    <img
+                    <Image
                         src={formImage.src}
                         alt="Promotional Image"
+                        width={0}
+                        height={0}
                         className="w-full h-auto object-cover rounded-lg"
                     />
                     <h2 className="px-4 text-center text-lg">
