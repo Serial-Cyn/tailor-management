@@ -25,7 +25,7 @@ export default function EntryField(
                 id={id}
                 name={name}
                 placeholder={placeholder}
-                className="p-2 border border-neutral-600 rounded"
+                className="px-4 py-2 border border-neutral-600 rounded-full"
                 required={required}
             />
         </div>
