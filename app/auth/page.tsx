@@ -19,6 +19,10 @@ export default function AuthPage() {
     const [formTitle, setFormTitle] = useState("Login");
     const [formImage, setFormImage] = useState(LogInArt);
 
+    // States that handles form submission feedback
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+
     // Reuses the same form for login and registration by toggling the state
     function changeForm() {
         setIsLogin(!isLogin);
@@ -26,6 +30,48 @@ export default function AuthPage() {
         setFormImage(isLogin ? SignUpArt : LogInArt);
     }
 
+    // Handles the submission of the form
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault(); // Prevents the default form submission behavior
+        setLoading(true);
+        setErrorMsg("");
+
+        // Collects the input data from the form
+        const formData = new FormData(event.currentTarget);
+        const email = formData.get("email") as string;
+        const password = formData.get("password") as string;
+
+        try {
+            // Sends the data to the appropriate endpoint based on the form type
+            const response = await fetch(
+                isLogin ? "/api/auth/login" : "/api/auth/register",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email,
+                        password,
+                    }),
+                }
+            );
+
+            // Handles the response from the server, to catch any authentication errors
+            const data = await response.json();
+
+            if (!response.ok) {
+                setErrorMsg(data.message || "An error occurred. Please try again.");
+                setLoading(false);
+
+                return;
+            }
+
+        } catch (error) {
+            setErrorMsg("An error occurred. Please try again.");
+        }
+
+    }
+
+    // Renders the authentication page with login and registration forms
     return (
         <main id="auth" className="flex flex-1 pt-32 min-h-screen justify-center">
             {/* NAVBAR */}
@@ -40,7 +86,7 @@ export default function AuthPage() {
                     </div>
                     {/* FORM */}
                     <div id="form-field">
-                        <form method="POST" className="mt-6 pb-6">
+                        <form onSubmit={handleSubmit} method="POST" className="mt-6 pb-6">
                             {/* EMAIL INPUT */}
                             <EntryField
                                 id="email"
@@ -95,6 +141,7 @@ export default function AuthPage() {
                         width={0}
                         height={0}
                         className="w-full h-auto object-cover rounded-lg"
+                        loading="eager"
                     />
                     <h2 className="px-4 text-center text-lg">
                         {isLogin ? "Welcome back! We're glad to see you again!" : "Join us and start your TailOps journey today!"}

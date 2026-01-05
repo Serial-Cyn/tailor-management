@@ -1,3 +1,12 @@
+## **0.2.0 - LOG IN/SIGN UP PAGE** --- 05/01/2026
+
+Added Log in / Sign up page and is now functional! Using PostgreSQL as the database and Prisma as the bridge between the database and the client, the user is now able to register their own email.
+
+NEW:
+- Log in and Sign up feature
+- Passwords are encrypted before entering the database
+- JWT and Cookies Authorization Security
+
 ## **0.1.0 - LANDING PAGE** --- 02/01/2026
 
 Added Landing page for users to see.
