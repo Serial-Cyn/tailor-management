@@ -1,4 +1,4 @@
-import { PrismaClient } from '../app/generated/prisma/client'
+import { PrismaClient } from '@/app/generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 
 // Ensure a single instance of PrismaClient is used across the app
