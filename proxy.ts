@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
     const token = request.cookies.get("access token")?.value;
 
     // If no token, redirect to auth page
@@ -25,3 +25,7 @@ export function middleware(request: NextRequest) {
         );
     }
 }
+
+export const config = {
+    matcher: ["/dashboard/:path*"],
+};
