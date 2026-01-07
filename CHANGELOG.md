@@ -1,3 +1,20 @@
+## **0.2.1 - SETUP PAGE** --- 07/01/2026
+
+Added ability to setup account for new users.
+- Set their First and Last Name
+- Their role type (Client, Manager, Tailor)
+- Added a new ComboBox component for selecting options with a label and required validation
+
+Updated:
+- Enhanced Button component to accept an optional onClick handler for better interactivity
+- Updated EntryField component to ensure full width styling for input fields
+
+Confirmed:
+- The tokens are working!
+
+Issues:
+- Roles are meaningless as their are no code to distinguish them
+
 ## **0.2.0 - LOG IN/SIGN UP PAGE** --- 05/01/2026
 
 Added Log in / Sign up page and is now functional! Using PostgreSQL as the database and Prisma as the bridge between the database and the client, the user is now able to register their own email.

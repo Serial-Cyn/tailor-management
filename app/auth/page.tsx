@@ -18,6 +18,7 @@ export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true);
     const [formTitle, setFormTitle] = useState("Login");
     const [formImage, setFormImage] = useState(LogInArt);
+    const [linkText, setLinkText] = useState("Don't have an account? Click me!");
 
     // States that handles form submission feedback
     const [loading, setLoading] = useState(false);
@@ -27,6 +28,7 @@ export default function AuthPage() {
     function changeForm() {
         setIsLogin(!isLogin);
         setFormTitle(isLogin ? "Sign Up" : "Log In");
+        setLinkText(isLogin ? "Already have an account? Click me!" : "Don't have an account? Click me!");
         setFormImage(isLogin ? SignUpArt : LogInArt);
     }
 
@@ -63,6 +65,14 @@ export default function AuthPage() {
                 setLoading(false);
 
                 return;
+            }
+
+            // Redirect to setup page if successful registration
+            if (!isLogin) {
+                window.location.href = "/setup";
+            } else {
+                // Redirect to dashboard on successful login
+                window.location.href = "/dashboard";
             }
 
         } catch (error) {
@@ -126,7 +136,7 @@ export default function AuthPage() {
                                     className="text-sm text-neutral-400 cursor-pointer"
                                     onClick={changeForm}
                                 >
-                                    Don&apos;t have an account? Click me!
+                                    {linkText}
                                 </button>
                             </div>
                         </form>

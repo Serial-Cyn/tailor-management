@@ -1,7 +1,14 @@
+'use client'
+// COMPONENTS
 import Button from "@/components/button";
 import Navbar from "@/components/navbar";
 
 export default function Home() {
+  function handleGetStarted() {
+    // Redirect to auth page
+    window.location.href = "/auth";
+  }
+
   return (
     <main id="landing-page" className="flex flex-col min-h-screen">
       <Navbar />
@@ -16,7 +23,7 @@ export default function Home() {
           </p>
         </div>
         <div id="cta">
-          <Button label="Get Started" variant="primary" />
+          <Button label="Get Started" variant="primary" onClick={handleGetStarted} />
         </div>
       </div>
     </main>

@@ -57,7 +57,10 @@ export async function POST(request: Request) {
             path: "/",
         });
 
-        return NextResponse.json({ success: true });
+        return NextResponse.json(
+            { message: "Registration successful" },
+            { status: 201 }
+        );
 
     } catch (err) {
         console.error(err);

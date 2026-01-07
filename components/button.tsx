@@ -1,6 +1,7 @@
 type ButtonProps = {
     label: string;
     variant: "primary" | "secondary";
+    onClick?: () => void;
     type?: "button" | "submit" | "reset";
     full?: boolean;
 };
@@ -15,14 +16,16 @@ export default function Button(
         label = "Click Me", 
         variant = "secondary", 
         type = "button",
+        onClick,
         full = false
-    } : ButtonProps) {
-    
+    } : ButtonProps)
+{
 
     return (
         <button 
             type={type}
             className={`${buttonVariants[variant]} ${full ? "w-full" : ""} px-6 py-2 rounded-full cursor-pointer hover:scale-105 transition-transform duration-200`}
+            onClick={onClick}
         >
             {label}
         </button>
