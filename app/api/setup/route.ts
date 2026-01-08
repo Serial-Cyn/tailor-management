@@ -4,6 +4,11 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
+    // Let the script know that we are expecting a JWT payload with an accountId to prevent TS errors
+    interface AuthTokenPayload extends jwt.JwtPayload {
+        accountId: string;
+    }
+
     try {
         const { fname, lname, role } = await request.json();
 
@@ -19,9 +24,9 @@ export async function POST(request: NextRequest) {
         }
 
         // Verify JWT and extract accountId
-        let decoded: any;
+        let decoded: AuthTokenPayload;
         try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET!);
+            decoded = jwt.verify(token, process.env.JWT_SECRET!) as AuthTokenPayload;
 
         } catch {
             return NextResponse.json(
@@ -30,7 +35,15 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const accountId = decoded.accountId; // Extracted from token
+        const accountId = Number(decoded.accountId); // Extracted from token
+
+        // Guard the script against invalid accountId
+        if (Number.isNaN(accountId)) {
+            return NextResponse.json(
+                { error: "Invalid account ID" },
+                { status: 400 }
+            );
+        }
 
         // Create user profile in the database
         const user = await prisma.user.create({
@@ -41,6 +54,7 @@ export async function POST(request: NextRequest) {
             },
         });
 
+        // RETURN STATEMENT
         return NextResponse.json(
             { message: "Setup complete", user },
             { status: 201 }

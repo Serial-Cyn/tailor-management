@@ -55,7 +55,7 @@ export default function Register() {
                         loading="eager"
                     />
                     <h1 className="text-5xl font-bold mb-1">Congratulations!</h1>
-                    <p className="text-neutral-400">Let's set you up to get your workspace ready.</p>
+                    <p className="text-neutral-400">Let&apos;s set you up to get your workspace ready.</p>
                 </div>
 
                 {/* FORM FIELDS */}

@@ -21,7 +21,6 @@ export default function AuthPage() {
     const [linkText, setLinkText] = useState("Don't have an account? Click me!");
 
     // States that handles form submission feedback
-    const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
 
     // Reuses the same form for login and registration by toggling the state
@@ -35,7 +34,6 @@ export default function AuthPage() {
     // Handles the submission of the form
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault(); // Prevents the default form submission behavior
-        setLoading(true);
         setErrorMsg("");
 
         // Collects the input data from the form
@@ -62,7 +60,6 @@ export default function AuthPage() {
 
             if (!response.ok) {
                 setErrorMsg(data.message || "An error occurred. Please try again.");
-                setLoading(false);
 
                 return;
             }

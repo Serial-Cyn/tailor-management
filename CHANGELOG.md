@@ -1,3 +1,7 @@
+## **0.2.2 - API** --- 08/01/2026
+
+Fix JWT handling and account ID validation in user setup
+
 ## **0.2.1 - SETUP PAGE** --- 07/01/2026
 
 Added ability to setup account for new users.
