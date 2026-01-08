@@ -1,19 +1,19 @@
+// LIBRARIES
 import prisma from "@/lib/prisma";
-import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function POST(request: NextRequest) {
-    // Let the script know that we are expecting a JWT payload with an accountId to prevent TS errors
-    interface AuthTokenPayload extends jwt.JwtPayload {
-        accountId: string;
-    }
+// HELPER FUNCTIONS
+import setAuthCookie from "@/app/api/auth/setAuthCookie";
+import signToken from "@/app/api/auth/signToken";
+import verifyToken from "@/app/api/auth/verifyToken";
 
+export async function POST(request: NextRequest) {
     try {
         const { fname, lname, role } = await request.json();
 
         // Get email from cookies
-        const token = request.cookies.get("access token")?.value;
+        const token = request.cookies.get("access_token")?.value;
 
         // If no token, user is unauthorized
         if (!token) {
@@ -24,13 +24,12 @@ export async function POST(request: NextRequest) {
         }
 
         // Verify JWT and extract accountId
-        let decoded: AuthTokenPayload;
-        try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET!) as AuthTokenPayload;
+        let decoded = verifyToken(token);
 
-        } catch {
+        // If token is invalid, user is unauthorized
+        if (!decoded) {
             return NextResponse.json(
-                { error: "Invalid token" },
+                { error: "Unauthorized" },
                 { status: 401 }
             );
         }
@@ -53,6 +52,16 @@ export async function POST(request: NextRequest) {
                 account: { connect: { id: accountId } },
             },
         });
+
+        // Issue new JWT with updated role
+        signToken({
+            accountId: accountId,
+            email: decoded.email,
+            role: role,
+        });
+
+        // Set new JWT as HttpOnly cookie
+        await setAuthCookie(token);
 
         // RETURN STATEMENT
         return NextResponse.json(

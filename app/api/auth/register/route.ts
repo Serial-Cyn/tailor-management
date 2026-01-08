@@ -1,6 +1,4 @@
 import bcrypt from "bcryptjs";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
@@ -39,23 +37,6 @@ export async function POST(request: Request) {
                 { status: 500 }
             );
         }
-
-        // Issue JWT for the new user
-        const token = jwt.sign(
-            { accountId: account.id, email: account.email },
-            process.env.JWT_SECRET as string,
-            { expiresIn: "15m" }
-        );
-
-        // Set JWT as HttpOnly cookie
-        (await
-            // Set JWT as HttpOnly cookie
-            cookies()).set("access token", token, { 
-            httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-            path: "/",
-        });
 
         return NextResponse.json(
             { message: "Registration successful" },
