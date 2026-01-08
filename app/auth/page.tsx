@@ -3,6 +3,7 @@
 // LIBRARIES
 import Image from "next/image";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 
 // ILLUSTRATIONS
 import LogInArt from "@/public/KaterinaLimpitsouni/undraw_hello_ccwj.svg";
@@ -66,11 +67,11 @@ export default function AuthPage() {
 
             // Redirect to setup page if successful registration
             if (!isLogin) {
-                window.location.href = "/setup";
-            } else {
-                // Redirect to dashboard on successful login
-                window.location.href = "/dashboard";
+                redirect("/setup");
             }
+            
+            // Redirect to dashboard on successful login
+            redirect("/dashboard");
 
         } catch (error) {
             setErrorMsg("An error occurred. Please try again.");

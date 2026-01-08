@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // HELPER FUNCTIONS
-import setAuthCookie from "@/app/api/auth/setAuthCookie";
-import signToken from "@/app/api/auth/signToken";
-import verifyToken from "@/app/api/auth/verifyToken";
+import SetAuthCookie from "@/app/api/auth/setAuthCookie";
+import SignToken from "@/app/api/auth/signToken";
+import VerifyToken from "@/app/api/auth/verifyToken";
 
 export async function POST(request: NextRequest) {
     try {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Verify JWT and extract accountId
-        const decoded = verifyToken(token);
+        const decoded = VerifyToken(token);
 
         // If token is invalid, user is unauthorized
         if (!decoded) {
@@ -54,14 +54,14 @@ export async function POST(request: NextRequest) {
         });
 
         // Issue new JWT with updated role
-        signToken({
+        SignToken({
             accountId: accountId,
             email: decoded.email,
             role: role,
         });
 
         // Set new JWT as HttpOnly cookie
-        await setAuthCookie(token);
+        await SetAuthCookie(token);
 
         // RETURN STATEMENT
         return NextResponse.json(

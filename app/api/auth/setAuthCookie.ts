@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export default async function setAuthCookie(token: string) {
+export default async function SetAuthCookie(token: string) {
     (await
         // Set JWT as HttpOnly cookie
         cookies()).set("access_token", token, { 
