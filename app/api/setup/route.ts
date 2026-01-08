@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Verify JWT and extract accountId
-        let decoded = verifyToken(token);
+        const decoded = verifyToken(token);
 
         // If token is invalid, user is unauthorized
         if (!decoded) {
