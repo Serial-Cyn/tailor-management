@@ -95,6 +95,13 @@ export default function AuthPage() {
                     {/* FORM */}
                     <div id="form-field">
                         <form onSubmit={handleSubmit} method="POST" className="mt-6 pb-6">
+                            {/* ERROR MESSAGE */}
+                            {errorMsg && (
+                                <div className="mb-4 p-3 bg-red-200 text-red-800 rounded">
+                                    {errorMsg}
+                                </div>
+                            )}
+
                             {/* EMAIL INPUT */}
                             <EntryField
                                 id="email"
