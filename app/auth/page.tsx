@@ -60,23 +60,22 @@ export default function AuthPage() {
             const data = await response.json();
 
             if (!response.ok) {
-                setErrorMsg(data.message || "An error occurred. Please try again.");
+                setErrorMsg(data.message || "Invalid credentials. Please try again.");
 
                 return;
             }
 
-            // Redirect to setup page if successful registration
-            if (!isLogin) {
-                redirect("/setup");
-            }
-            
-            // Redirect to dashboard on successful login
-            redirect("/dashboard");
-
         } catch (error) {
-            setErrorMsg("An error occurred. Please try again.");
+            setErrorMsg("ERROR [100]: " + (error as Error).message || "An error occurred. Please try again.");
         }
 
+        // Redirect to setup page if successful registration
+        if (!isLogin) {
+            redirect("/setup");
+        }
+            
+        // Redirect to dashboard on successful login
+        redirect("/dashboard");
     }
 
     // Renders the authentication page with login and registration forms
