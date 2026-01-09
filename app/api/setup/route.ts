@@ -54,16 +54,16 @@ export async function POST(request: NextRequest) {
         });
 
         // Issue new JWT with updated role
-        SignToken({
+        const new_token = SignToken({
             accountId: accountId,
             email: decoded.email,
             role: role,
         });
 
         // Set new JWT as HttpOnly cookie
-        await SetAuthCookie(token);
+        await SetAuthCookie(new_token);
 
-        // RETURN STATEMENT
+        // Setup complete
         return NextResponse.json(
             { message: "Setup complete", user },
             { status: 201 }

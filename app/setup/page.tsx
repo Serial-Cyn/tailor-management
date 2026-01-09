@@ -2,6 +2,7 @@
 
 // LIBRARIES
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // ILLUSTRATIONS
 import RegisterArt from "@/public/KaterinaLimpitsouni/undraw_working_n9u0.svg";
@@ -12,6 +13,9 @@ import ComboBox from "@/components/form-control/comboBox";
 import EntryField from "@/components/form-control/entryField";
 
 export default function Register() {
+    const router = useRouter();
+
+    // Handles the submission of the registration form
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
@@ -29,13 +33,14 @@ export default function Register() {
                 body: JSON.stringify({ fname, lname, role }),
             });
 
-            // Handles the response from the server
-            const data = await response.json();
-
             if (!response.ok) {
-                console.error("Registration failed:", data.message);
+                router.push("/auth");
+
                 return;
             }
+
+            // Redirect user to dashboard
+            router.push("/dashboard");
 
         } catch (error) {
             console.error("Error during registration:", error);
