@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { redirect } from "next/navigation";
 
 // HELPER FUNCTIONS
 import VerifyToken from "@/app/api/auth/verifyToken";
@@ -10,7 +9,7 @@ export default function proxy(request: NextRequest) {
 
     // If no token, redirect to auth page
     if (!token) {
-        return redirect("/auth");
+        return NextResponse.redirect(new URL("/auth", request.url));
     }
 
     try {
@@ -19,14 +18,14 @@ export default function proxy(request: NextRequest) {
 
         // If valid, proceed to the requested dashboard route
         if (!decoded) {
-            return redirect("/auth");
+            return NextResponse.redirect(new URL("/auth", request.url));
         }
         
         return NextResponse.next();
 
     } catch {
         // Invalid token, redirect to auth page
-        return redirect("/auth");
+        return NextResponse.redirect(new URL("/auth", request.url));
     }
 }
 
