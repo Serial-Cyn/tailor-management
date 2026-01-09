@@ -1,12 +1,11 @@
 // LIBRARIES
 import { cookies } from "next/headers"
-import { NextRequest, NextResponse } from "next/server";
 
 // HELPER FUNCTIONS
 import VerifyToken from "@/app/api/auth/verifyToken";
 import { redirect } from "next/navigation";
 
-export default async function Dashboard(request: NextRequest) {
+export default async function Dashboard() {
     // Get access token from cookies
     const token = (await cookies()).get("access_token")?.value;
 
