@@ -23,7 +23,7 @@ export default function Register() {
         const formData = new FormData(event.currentTarget);
         const fname = formData.get("fname") as string;
         const lname = formData.get("lname") as string;
-        const role = formData.get("role") as string;
+        const role = (formData.get("role") as string).toLowerCase();
 
         try {
             // Send data to the server
