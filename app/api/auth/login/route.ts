@@ -43,11 +43,19 @@ export async function POST(request: Request) {
         const token = SignToken({
             accountId: account.id,
             email: account.email,
-            role: userProfile?.type || "guest",
+            role: userProfile?.type || "setup",
         });
         
         // Set JWT as HttpOnly cookie
         await SetAuthCookie(token);
+
+        // If user profile not found, create a new one
+        if (!userProfile) {
+            return NextResponse.json(
+                { message: "No user found. creating new user" },
+                { status: 302 }
+            );
+        }
 
         return NextResponse.json(
             { message: "Login successful" },

@@ -1,6 +1,11 @@
+// LIBRARIES
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+
+// HELPER FUNCTIONS
+import SignToken from "@/app/api/auth/signToken";
+import SetAuthCookie from "@/app/api/auth/setAuthCookie";
 
 export async function POST(request: Request) {
     try {
@@ -37,6 +42,16 @@ export async function POST(request: Request) {
                 { status: 500 }
             );
         }
+
+        // Create initial cookie for setup process
+        const token = SignToken({
+            accountId: account.id,
+            email: account.email,
+            role: "setup", // Temporary role for setup
+        });
+
+        // Set JWT as HttpOnly cookie
+        await SetAuthCookie(token);
 
         return NextResponse.json(
             { message: "Registration successful" },

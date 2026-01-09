@@ -3,7 +3,7 @@
 // LIBRARIES
 import Image from "next/image";
 import { useState } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // ILLUSTRATIONS
 import LogInArt from "@/public/KaterinaLimpitsouni/undraw_hello_ccwj.svg";
@@ -15,6 +15,8 @@ import EntryField from "@/components/form-control/entryField";
 import Navbar from "@/components/navbar";
 
 export default function AuthPage() {
+    const router = useRouter();
+
     // States that toggle between login and registration forms
     const [isLogin, setIsLogin] = useState(true);
     const [formTitle, setFormTitle] = useState("Login");
@@ -59,7 +61,13 @@ export default function AuthPage() {
             // Handles the response from the server, to catch any authentication errors
             const data = await response.json();
 
-            if (!response.ok) {
+            // Redirect to setup page if no user profile found
+            if (response.status === 302) {
+                router.push("/setup");
+
+                return;
+
+            } else if (!response.ok) { // If response is not ok (200-299), display the error message
                 setErrorMsg(data.message || "Invalid credentials. Please try again.");
 
                 return;
@@ -71,11 +79,13 @@ export default function AuthPage() {
 
         // Redirect to setup page if successful registration
         if (!isLogin) {
-            redirect("/setup");
+            router.push("/setup");
+
+            return;
         }
-            
-        // Redirect to dashboard on successful login
-        redirect("/dashboard");
+
+        // Successful login redirects to dashboard
+        router.push("/dashboard");
     }
 
     // Renders the authentication page with login and registration forms
