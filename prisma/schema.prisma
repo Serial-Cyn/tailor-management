@@ -29,3 +29,27 @@ model User {
   account   Account @relation(fields: [accountId], references: [id])
   accountId Int     @unique
 }
+
+model Style {
+  id          Int       @id @default(autoincrement())
+  code_name   String    @unique
+  items       String[]
+  quantities  Int[]
+  unit_prices Decimal[]
+  collection  Collection?
+}
+
+model Collection {
+  id Int @id @default(autoincrement())
+  code_name String @unique
+  style Style @relation(fields: [style_id], references: [id])
+  style_id Int @unique
+  purchase_order PurchaseOrder[]
+}
+
+model PurchaseOrder {
+  id Int @id @default(autoincrement())
+  code_name String @unique
+  collection Collection @relation(fields: [collection_id], references: [id])
+  collection_id Int
+}

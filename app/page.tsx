@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main id="landing-page" className="flex flex-col min-h-screen">
       <Navbar />
-      <div
+      <section
         id="hero"
         className="flex flex-col flex-1 w-full h-full justify-center items-center space-y-6"
       >
@@ -25,7 +25,10 @@ export default function Home() {
         <div id="cta">
           <Button label="Get Started" variant="primary" onClick={handleGetStarted} />
         </div>
-      </div>
+      </section>
+      <section id="details">
+        
+      </section>
     </main>
   );
 }
